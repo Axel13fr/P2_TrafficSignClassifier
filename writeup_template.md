@@ -19,7 +19,10 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
+[distrib]: ./report_img/distrib.png "Distributions"
+[random_pick]: ./report_img/random_pick.png "Random Pick"
+[oneperclass]: ./report_img/oneperclass.png "One Ex. Per Class"
+
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
@@ -36,7 +39,7 @@ The goals / steps of this project are the following:
 
 ####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+You're reading it! and here is a link to my [project code](https://github.com/Axel13fr/P2_TrafficSignClassifier/Traffic_Sign_Classifier.ipynb)
 
 ###Data Set Summary & Exploration
 
@@ -47,18 +50,29 @@ The code for this step is contained in the second code cell of the IPython noteb
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
 
-* The size of training set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
+* Number of training examples = 34799
+* Number of testing examples = 4410
+* Image data shape = (32, 32, 3)
+* Number of classes = 43
+
 
 ####2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
 The code for this step is contained in the third code cell of the IPython notebook.  
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Here is an exploratory visualization of the data set.
 
-![alt text][image1]
+First of all, the distribution of the classes among the different sets:
+
+![Class Distributions][distrib]
+
+One can see that the distributions are close enough to expect no accuracy deformation due to different sampling of the classes among the sets. However, some categories are largely underrepresented, for example on the training set, some classes have 2000 samples while other have as low as 200 which is 10 times less ! It would be interested to compute the accuracy per class later and see if that correlates with a low number of samples available at training.
+
+Let's take 4 random samples from the training set to see the images:
+![Randomly picked Images][random_pick]
+
+And now lets have a look at one picture from each class:
+![One per class][oneperclass]
 
 ###Design and Test a Model Architecture
 
