@@ -189,12 +189,13 @@ Expected: [4, 25, 28, 15, 29]
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| 70 limit      		| 20 limit   									| 
+| Road work     			| Road Work 								|
+| children crossing					| Pedestrians											|
+| No vehicles	      		| Double curve				 				|
+| bicycles crossing			| No passing for vehicles over 3.5 metric tons      							|
 
+Both the 70limit and the children crossing errors are close to the truth : 20limit & pedestrians crossing are visually close to them. However, the ressemblance on the 2 other errors is harder to understand as even the shape (triangular vs circle) do no match.
 
 The model was able to correctly guess 1 of the 5 traffic signs, which gives an accuracy of 20%. This compares badly to the accuracy on the test set of 93%. There are several factors to explain this: the perspective or the kind of shots taken are too far from the provided sets. Another one is that 5examples is far from being statistically relevant to validate generlization so even having 100% would not say much.
 
