@@ -121,9 +121,13 @@ My final model consisted of the following layers:
 
 ####4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-The code for training the model is located in the eigth cell of the ipython notebook. 
+The code for training the model is located in the 13th-17th cells of the ipython notebook. 
 
-To train the model, I used an ....
+I have rate, epochs and batch size as the classical hyperparameters but I've included as well 3 others worth mentionning: the drop out rates (keep probability) applied to the convolutional layers (C1 for conv1 and C2 for conv2 and conv3) and to the fully connected layers (FC_Prob). As I will detail below, these were critical to manage to reduce the overfitting problem.
+
+To train the model, I used the AdamOptimizer which has the advantage to take care of learning rate decaying over epochs so that helps having one less hyperparameter to tune (possibly at the price of missing some accuracy against a fine tuned gradient descent). Softmax was used to normalize the output to probabilities and one hot was used to compare to the only valid class per sample.
+
+The training code is self explanatory, with 2 useful additions of my own: a remaining time estimator based on the average train time for 1 epoch and a small logger class to plot the accuracy rates over the epochs at the end of the training.
 
 ####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
