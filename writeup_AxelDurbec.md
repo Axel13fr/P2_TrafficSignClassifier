@@ -21,11 +21,11 @@ The goals / steps of this project are the following:
 
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[ts1]: ./webImages/70limit.jpg "Traffic Sign 1"
+[ts2]: ./webImages/bicyclescrossing2.jpg "Traffic Sign 2"
+[ts3]: ./webImages/childrenCrossing.jpg "Traffic Sign 3"
+[ts4]: ./webImages/noVehicles2.jpg "Traffic Sign 4"
+[ts5]: ./webImages/roadwork.jpg "Traffic Sign 5"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -174,16 +174,18 @@ I ready many more things to try out on this problem based on the papers, but due
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][ts1] ![alt text][ts2] ![alt text][ts3] 
+![alt text][ts4] ![alt text][ts5]
 
-The first image might be difficult to classify because ...
+Most of the images might be difficult to classify because they are seen from a different perspective so their surface is less "flat" compared to the training set.
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
-The code for making predictions on my final model is located in the tenth cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 22th cell of the Ipython notebook.
 
 Here are the results of the prediction:
+Predictions: [ 0 25 27 23 12]
+Expected: [4, 25, 28, 15, 29]
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
@@ -194,7 +196,7 @@ Here are the results of the prediction:
 | Slippery Road			| Slippery Road      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 1 of the 5 traffic signs, which gives an accuracy of 20%. This compares badly to the accuracy on the test set of 93%. There are several factors to explain this: the perspective or the kind of shots taken are too far from the provided sets. Another one is that 5examples is far from being statistically relevant to validate generlization so even having 100% would not say much.
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
