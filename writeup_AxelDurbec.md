@@ -1,9 +1,5 @@
 #**Traffic Sign Recognition** 
 
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
 ---
 
 **Build a Traffic Sign Recognition Project**
@@ -78,15 +74,19 @@ And now lets have a look at one picture from each class:
 
 ####1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
-The code for this step is contained in the fourth code cell of the IPython notebook.
+The code for this step is contained in the fourth code cell of the IPython notebook. I have choosen a tensorflow implementation to use my GPU speed and easily make sure that whatever the source, as long as its 32x32 RGB, the same chain will always be applied. Another advantage is that the tf functions will randomly change the images so every epochs will generate slightly new samples !
 
-As a first step, I decided to convert the images to grayscale because ...
+Interestingly enough because counter intuitive at first, in his paper treating road sign classification, Yann Lecun mentions that the color information didn't improve the performance vs Grayscale, which is very interesting to reduce the number of parameters (input depth becomes 1 instead of 3), so I went for this approach. 
+
+On the top of that, I've tried various random transformations for data augmentation, which shall help to prevent overfit and get better results on the test set. I've choosen transformations which shall not affect the meaning of the sign nor deteriorate some important characteristics (ex: horizontal flip was not good because road sign texts are not symmetric). 
+
+However in practice, this didn't reveal any improvements at least for the ones I have tried and my choosen architecture, there must be something to do with this so more investigation would be required.
+
+Finally, standardization is applied to make sure all images are on the same scale, this will help the weights to treat the same range of data and ensure numerical stability. 
 
 Here is an example of a traffic sign image before and after grayscaling.
 
 ![alt text][image2]
-
-As a last step, I normalized the image data because ...
 
 ####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
