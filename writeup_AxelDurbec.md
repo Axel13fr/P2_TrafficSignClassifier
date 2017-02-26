@@ -131,6 +131,7 @@ The training code is self explanatory, with 2 useful additions of my own: a rema
 
 ####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
+##### Code and results
 The code for calculating the accuracy of the model is located in the 16th & 17th cells of the Ipython notebook.
 
 My final model results were:
@@ -138,23 +139,25 @@ My final model results were:
 * validation set accuracy of 94.5%
 * test set accuracy of 93%
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-I investigated the most successfull architectures at ILSVRC Challenge over the past years. These were all aimed at image classification and I had LeNet already implemented from the last Lab so I decided to take it as a start because most of these architectures are not so far from it (After all, AlexNet was roughly a bigger & deeper LeNet). Last but not least, CNNs are still the state of the art in 2017 although there has been some improvements in how they are used in different architectures (ResNet omits the FC layers for example).
+##### Architecture choices
 
-* What were some problems with the initial architecture?
+I investigated the most successfull architectures at ILSVRC Challenge over the past years. These were all aimed at image classification and I had LeNet already implemented from the last Lab so I decided to take it as a start because most of these architectures are not so far from it (After all, AlexNet was roughly a bigger & deeper LeNet) and I could then build my own variation iteratively. Last but not least, CNNs are still the state of the art in 2017 although there has been some improvements in how they are used in different architectures (ResNet omits the FC layers for example).
+
 At first, taking the raw LeNet architecture from the previous Lab, even after image normalization, didn't allow me to go over the 90% on the traning set and the validation set even below that (> 10% less accuracy). This suggested an overfit that might even block the model from learning.
 
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to over fitting or under fitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+##### Architecture adjustments
+
 The very first breakthrough was to introduce a 50% dropout on the first FC layer to reduce the overfit. This allowed the network to completely learn the training set (reaching 99.8%) but still didn't generalize well: I had about 10% less on the test set so at that point, my network could learn very well but could not generalize well.
 
 The second breakthrough after many trials/errors/paper reading was that FC layers are much more subject to overfit that the convolutionnal layers (the CNN layers compensate overfit via the shared weights) so as dropout was not enough and applying dropout to CNNs was not helping much: I completely took off one FC layer. This first reduced the training accuracy, which I partially compensated by adding an extra CNN layer and I gained 2 things with that: 
 - my model learning was stable after a large number of epochs (i.e: no use of early termination had to be used to avoid overfit or to avoid performance drop)
 - the delta between train & validation set reduced from 10 to about 5% !
 
+##### Fine tuning
+
 My last steps on tuning the model was to apply different dropouts based on the layers: the first CNN layers extract general shapes so they are less likely to overfit while the later CNN layers become more problem specialized and the FC layers are very sensitive to overfit so the further in the chain, the more dropout to apply: 90% for Conv1, 75% for Conv2 & 3 and 50% for FC1 and FC2.
+
+I added more epochs from 30 to 80 to have enough training to get 2 more % as the model was still making slow progress. Low learning rate was needed to avoid having too much noise towards the last steps of convergence.
 
 With all these changes together, I was able to train for 80 epochs to get to 93% on the test set.
 
