@@ -149,17 +149,24 @@ At first, taking the raw LeNet architecture from the previous Lab, even after im
 
 The very first breakthrough was to introduce a 50% dropout on the first FC layer to reduce the overfit. This allowed the network to completely learn the training set (reaching 99.8%) but still didn't generalize well: I had about 10% less on the test set so at that point, my network could learn very well but could not generalize well.
 
-The second breakthrough after many trials/errors/paper reading was that FC layers are much more subject to overfit that the convolutionnal layers (the CNN layers compensate overfit via the shared weights) so as dropout was not enough and applying dropout to CNNs was not helping much: I completely took off one FC layer. This first reduced the training accuracy, which I partially compensated by adding an extra CNN layer and I gained 2 things with that: 
+The second breakthrough after many trials/errors/paper reading was that FC layers are much more subject to overfit that the convolutionnal layers (the Conv layers compensate overfit via the shared weights) so as dropout was not enough and applying dropout to CNNs was not helping much: I completely took off one FC layer. This first reduced the training accuracy, which I partially compensated by adding an extra Conv layer and I gained 2 things with that: 
 - my model learning was stable after a large number of epochs (i.e: no use of early termination had to be used to avoid overfit or to avoid performance drop)
 - the delta between train & validation set reduced from 10 to about 5% !
 
 ##### Fine tuning
 
-My last steps on tuning the model was to apply different dropouts based on the layers: the first CNN layers extract general shapes so they are less likely to overfit while the later CNN layers become more problem specialized and the FC layers are very sensitive to overfit so the further in the chain, the more dropout to apply: 90% for Conv1, 75% for Conv2 & 3 and 50% for FC1 and FC2.
+My last steps on tuning the model was to apply different dropouts based on the layers: the first Conv layers extract general shapes so they are less likely to overfit while the later Conv layers become more problem specialized and the FC layers are very sensitive to overfit so the further in the chain, the more dropout to apply: 90% for Conv1, 75% for Conv2 & 3 and 50% for FC1 and FC2.
 
 I added more epochs from 30 to 80 to have enough training to get 2 more % as the model was still making slow progress. Low learning rate was needed to avoid having too much noise towards the last steps of convergence.
 
 With all these changes together, I was able to train for 80 epochs to get to 93% on the test set.
+
+##### To be continued....
+I ready many more things to try out on this problem based on the papers, but due to the lack of time, I couldn't go over all the experimental space which would have got me to probably better performances. This includes for example:
+- fine tuning the Filter Size & Fepth of the Conv layers 
+- investigating more on data augmentation to get it working effectively (maybe that didn't influence the results back then because my architecture was poorly performing)
+- batch normalization
+- Inception Module from GoogLeNet
 
 ###Test a Model on New Images
 
