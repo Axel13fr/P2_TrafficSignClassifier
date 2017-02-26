@@ -201,17 +201,22 @@ The model was able to correctly guess 1 of the 5 traffic signs, which gives an a
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 26th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the model is quite sure that this is a 20limit  sign (probability of 0.74), and the image contains a 70 limit. The 70limit comes as the second choice with 16%, which is still quite a gap.
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| .74         			| 20 Limit   									| 
+| .16     				| 70 Limit 										|
+| .05					| 30 Limit											|
 
+For the second image, the model has no doubt it is road work and this is the case.
 
-For the second image ... 
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .92         			| Road work   									| 
+| .02     				| Bumpy Road 										|
+| .02					| Wild Animals											|
+
+For the third image, the model looks confused:
