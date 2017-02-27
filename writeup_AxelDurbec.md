@@ -21,11 +21,14 @@ The goals / steps of this project are the following:
 
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
-[ts1]: ./webImages/70limit.jpg "Traffic Sign 1"
-[ts2]: ./webImages/bicyclescrossing2.jpg "Traffic Sign 2"
-[ts3]: ./webImages/childrenCrossing.jpg "Traffic Sign 3"
-[ts4]: ./webImages/noVehicles2.jpg "Traffic Sign 4"
-[ts5]: ./webImages/roadwork.jpg "Traffic Sign 5"
+
+[ts1]: ./webImages/childrenCrossing2.jpg "Traffic Sign 1"
+[ts2]: ./webImages/yield.jpg "Traffic Sign 2"
+[ts3]: ./webImages/50Limit.jpg "Traffic Sign 3"
+[ts4]: ./webImages/70limit.jpg "Traffic Sign 4"
+[ts5]: ./webImages/bicyclescrossing2.jpg "Traffic Sign 5"
+[ts6]: ./webImages/noVehicles2.jpg "Traffic Sign 6"
+[ts7]: ./webImages/roadwork.jpg "Traffic Sign 7"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -136,7 +139,7 @@ The code for calculating the accuracy of the model is located in the 16th & 17th
 
 My final model results were:
 * training set accuracy of 98.2%
-* validation set accuracy of 94.5%
+* validation set accuracy of 95.2%
 * test set accuracy of 93%
 
 ##### Architecture choices
@@ -163,6 +166,7 @@ With all these changes together, I was able to train for 80 epochs to get to 93%
 
 ##### To be continued....
 I ready many more things to try out on this problem based on the papers, but due to the lack of time, I couldn't go over all the experimental space which would have got me to probably better performances. This includes for example:
+- using L2 regularization (Less overfit allows more complex architecture, which in turn can improve performance)
 - fine tuning the Filter Size & Fepth of the Conv layers 
 - investigating more on data augmentation to get it working effectively (maybe that didn't influence the results back then because my architecture was poorly performing)
 - batch normalization
@@ -175,7 +179,7 @@ I ready many more things to try out on this problem based on the papers, but due
 Here are five German traffic signs that I found on the web:
 
 ![alt text][ts1] ![alt text][ts2] ![alt text][ts3] 
-![alt text][ts4] ![alt text][ts5]
+![alt text][ts4] ![alt text][ts5] ![alt text][ts6] ![alt text][ts7]
 
 Most of the images might be difficult to classify because they are seen from a different perspective so their surface is less "flat" compared to the training set.
 
@@ -184,18 +188,10 @@ Most of the images might be difficult to classify because they are seen from a d
 The code for making predictions on my final model is located in the 22th cell of the Ipython notebook.
 
 Here are the results of the prediction:
-Predictions: [ 0 25 27 23 12]
-Expected: [4, 25, 28, 15, 29]
+Predictions: ['Bicycles crossing', 'Yield', 'Speed limit (30km/h)', 'Speed limit (30km/h)', 'Road work', 'Keep right', 'No passing for vehicles over 3.5 metric tons']
+Expected: ['Children crossing', 'Yield', 'Speed limit (50km/h)', 'Speed limit (70km/h)', 'Road work', 'No vehicles', 'Bicycles crossing']
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| 70 limit      		| 20 limit   									| 
-| Road work     			| Road Work 								|
-| children crossing					| Pedestrians											|
-| No vehicles	      		| Double curve				 				|
-| bicycles crossing			| No passing for vehicles over 3.5 metric tons      							|
-
-Both the 70limit and the children crossing errors are close to the truth : 20limit & pedestrians crossing are visually close to them. However, the ressemblance on the 2 other errors is harder to understand as even the shape (triangular vs circle) do no match.
+Both the 50limit and the children crossing errors are close to the truth : 30limit & pedestrians crossing are visually close to them. However, the ressemblance on the 2 last errors is harder to understand as even the shape (triangular vs circle) do no match.
 
 The model was able to correctly guess 1 of the 5 traffic signs, which gives an accuracy of 20%. This compares badly to the accuracy on the test set of 93%. There are several factors to explain this: the perspective or the kind of shots taken are too far from the provided sets. Another one is that 5examples is far from being statistically relevant to validate generlization so even having 100% would not say much.
 
