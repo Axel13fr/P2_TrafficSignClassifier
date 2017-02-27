@@ -30,6 +30,10 @@ The goals / steps of this project are the following:
 [ts6]: ./webImages/noVehicles2.jpg "Traffic Sign 6"
 [ts7]: ./webImages/roadwork.jpg "Traffic Sign 7"
 
+[top1]: ./report_img/childcrossing.png "Child Cross Top5"
+[top2]: ./report_img/speedlimit50.png "Speed Limit 50 Top5"
+[top3]: ./report_img/yield.png "Yield Top5"
+
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
@@ -176,12 +180,12 @@ I ready many more things to try out on this problem based on the papers, but due
 
 ####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are seven traffic signs that I found on the web, I decided to mix them with some french traffic signs, they are very similar with some light variations on the police used or the width of the colored borders. This will be interesting for generalization.
 
 ![alt text][ts1] ![alt text][ts2] ![alt text][ts3] 
 ![alt text][ts4] ![alt text][ts5] ![alt text][ts6] ![alt text][ts7]
 
-Most of the images might be difficult to classify because they are seen from a different perspective so their surface is less "flat" compared to the training set.
+Many of the images might be difficult to classify as they are seen from a different perspective so their surface is less "flat" compared to the training set. Other than that, the police for speed limits is a bit different on the french 50limit sign
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -193,26 +197,22 @@ Expected: ['Children crossing', 'Yield', 'Speed limit (50km/h)', 'Speed limit (7
 
 Both the 50limit and the children crossing errors are close to the truth : 30limit & pedestrians crossing are visually close to them. However, the ressemblance on the 2 last errors is harder to understand as even the shape (triangular vs circle) do no match.
 
-The model was able to correctly guess 1 of the 5 traffic signs, which gives an accuracy of 20%. This compares badly to the accuracy on the test set of 93%. There are several factors to explain this: the perspective or the kind of shots taken are too far from the provided sets. Another one is that 5examples is far from being statistically relevant to validate generlization so even having 100% would not say much.
+The model was able to correctly guess 2 of the 7 traffic signs, which gives an accuracy of 28%. This compares badly to the accuracy on the test set of 93%. There are several factors to explain this: the perspective or the kind of shots taken are too far from the provided sets. Another one is that 7examples is far from being statistically relevant to validate generlization so even having 100% would not say much. 
+
+Last but not least, I think the model didn't learn well enough to differenciate between some of the classes which are very similar (for example the crossings or speed limits only varies by the text or the drawing) and this can be due to the fact that the training set was not equally distributed and I did no data augmentation to compensate that.
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 The code for making predictions on my final model is located in the 26th cell of the Ipython notebook.
 
-For the first image, the model is quite sure that this is a 20limit  sign (probability of 0.74), and the image contains a 70 limit. The 70limit comes as the second choice with 16%, which is still quite a gap.
+For the first image, the model took Children crossing for Bicycles. This can be explained as the shapes and colors are the same, the difference is only in the black drawing which can look similar at low resolution.
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .74         			| 20 Limit   									| 
-| .16     				| 70 Limit 										|
-| .05					| 30 Limit											|
+![alt text][top1]
 
-For the second image, the model has no doubt it is road work and this is the case.
+For the second image, the model finds in its top3 the speed limits so it looks like the text differences were not learned enough to properly distinguish. The true sign comes as number 2 interestingly.
+![alt text][top2]
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .92         			| Road work   									| 
-| .02     				| Bumpy Road 										|
-| .02					| Wild Animals											|
+For the third image, the model is absolutely sure of the sign. The distinctive sign of the yield might help well in this.
+![alt text][top3]
 
-For the third image, the model looks confused:
+For further examples, such graphs are available in notebook. Interestingly, the no vehicles sign was completely mistaken for the keep right sign although they don't seem close at all visually except for the round shape.
